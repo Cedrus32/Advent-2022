@@ -14,16 +14,11 @@ function getSharedItems(array) {
     return sharedItems
 }
 
+
 function getSharedItem(array) {
     for (let i in array[0]) {
-        for (let j in array[1]) {
-            if (array[0][i] === array[1][j]) {
-                for (let k in array[2]) {
-                    if (array[0][i] === array[2][k]) {
-                        return array[0][i];
-                    }
-                }
-            }
+        if (array[1].includes(array[0][i]) && array[2].includes(array[0][i])) {
+            return array[0][i];
         }
     }
 }
