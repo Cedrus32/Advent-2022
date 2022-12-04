@@ -4,25 +4,25 @@ const input = readFile('./input.txt').split('\n');
 
 function getSharedItems(array) {
     let sharedItems = [];
-    for (let rucksack in array) {
-        let containers = getContainers(array[rucksack]);
-        let sharedItem = getSharedItem(containers);
+    let i = 0;
+    while (i <= (array.length - 3)) {
+        let group = [array[i], array[i + 1], array[i + 2]];
+        let sharedItem = getSharedItem(group);
         sharedItems.push(sharedItem);
-    };
+        i += 3;
+    }
     return sharedItems
 }
 
-function getContainers(rucksack) {
-    let container0 = rucksack.slice(0, (rucksack.length / 2));
-    let container1 = rucksack.slice(((rucksack.length / 2)), (rucksack.length));
-    return [container0, container1];
-}
-
-function getSharedItem(containers) {
-    for (let i in containers[0]) {
-        for (let j in containers[1]) {
-            if (containers[0][i] === containers[1][j]) {
-                return containers[0][i];
+function getSharedItem(array) {
+    for (let i in array[0]) {
+        for (let j in array[1]) {
+            if (array[0][i] === array[1][j]) {
+                for (let k in array[2]) {
+                    if (array[0][i] === array[2][k]) {
+                        return array[0][i];
+                    }
+                }
             }
         }
     }
